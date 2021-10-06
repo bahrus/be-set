@@ -11,7 +11,7 @@ be-set provides a way of doing a single Object.assign on the custom element, whe
 ## Syntax:
 
 ```html
-<my-custom-element defer-hydrate be-set='
+<my-custom-element defer-hydration be-set='
 {
     "myStringProp": "supercalifragilisticexpialidocious",
     "myNumProp": 6.022140857E1023,
@@ -25,10 +25,10 @@ be-set provides a way of doing a single Object.assign on the custom element, whe
 <be-set></be-set>
 ```
 
-If attribute defer-hydrate is not found, be-set will first add the attribute, before doing the Object.assign, then remove it.  If the defer-hydrate is found, it is configurable whether be-set will remove it:
+If attribute defer-hydration is not found, be-set will first add the attribute, before doing the Object.assign, then remove it.  If the defer-hydration is found, it is configurable whether be-set will remove it:
 
 ```html
-<my-custom-element defer-hydrate be-set='
+<my-custom-element defer-hydration be-set='
 {
     "myStringProp": "supercalifragilisticexpialidocious",
     "myNumProp": 6.022140857E1023,
@@ -39,5 +39,5 @@ If attribute defer-hydrate is not found, be-set will first add the attribute, be
 }
 '>
 ...
-<be-set leave-defer-hydrate></be-set>
+<be-set leave-defer-hydration></be-set>
 ```
