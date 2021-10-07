@@ -1,6 +1,6 @@
 # be-set [TODO]
 
-be-set is a Custom Element DOM decorator that addresses a number of use cases.
+be-set is a Custom Element / native DOM decorator that addresses a number of use cases.
 
 Let's see an example of be-set in action before diving into its use cases.  
 
