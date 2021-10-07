@@ -2,7 +2,9 @@
 
 be-set is a Custom Element DOM decorator that addresses a number of use cases.
 
-Let's see an example of be-set in action before diving into its use cases.  For the syntax below:
+Let's see an example of be-set in action before diving into its use cases.  
+
+For the syntax below:
 
 ```html
 <my-custom-element defer-hydration be-set='
@@ -19,7 +21,7 @@ Let's see an example of be-set in action before diving into its use cases.  For 
 <be-set></be-set>
 ```
 
-be-set does the following:
+... *be-set* does the following:
 
 1.  Parses the be-set attribute using JSON.Parse.
 2.  Does an Object.assign of the instance the attribute is on (my-custom-element in this case),  shallow-merging the parsed object obtained in step 1.
