@@ -70,5 +70,5 @@ The way be-set treats arrays is as follows:
 
 The use of the defer-hydration attribute in the example above alludes to the [defer-hydration proposal](https://github.com/webcomponents-cg/community-protocols/blob/defer-hydration/proposals/defer-hydration.md).  So this example suggests an approach that builds on that proposed protocol.
 
-Another significant reason for providing specific support for setting attributes is this -- xtal-decor derived element decorators rely heavily on attributes to initialize (and even [update](https://github.com/bahrus/xtal-decor#approach-ii-setting-properties-via-the-controlling-attribute)) the behavior / decoration.
+
 
