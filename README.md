@@ -1,6 +1,6 @@
 # be-set [TODO]
 
-be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's properties / attributes.
+be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's properties / attributes via deep merge.
 
 ## Basic Use  
 
@@ -35,40 +35,13 @@ However, [a VSCode plugin](https://marketplace.visualstudio.com/items?itemName=a
 
 Following this approach allows multiple initial settings to be done in one "pass", without requiring as many "flops" of processing -- reading individual attributes, parsing them based on the type of property in question, etc.
 
-## Advanced Use
+## Adding Non-JSON serializable settings
 
-In the example above, the JSON attribute is a key/value object.
-
-be-set provides more advanced capabilities if the JSON attribute is an array:
-
-```html
-<my-custom-element be-set='[
-{
-    "defer-hydration": true,
-    "disabled": true
-},
-{
-    "myStringProp": "supercalifragilisticexpialidocious",
-    "myNumProp": 6.022140857E1023,
-    "myBool": false,
-    "myObjectProp": {
-        "mySubObj":{}
-    }
-},
-{
-    "defer-hydration": false
-}
-]'>
-```
-
-The way be-set treats arrays is as follows:
-
-1.  The items with even index are treated as attribute settings.
-2.  Items with odd index are treated as before -- A single Object.assign
-3.  Between each step, a yield of the thread is injected.
+The [nomodule](https://github.com/bahrus/nomodule) provides a way of exposing JS entities to the DOM world.
 
 
-The use of the defer-hydration attribute in the example above alludes to the [defer-hydration proposal](https://github.com/webcomponents-cg/community-protocols/blob/defer-hydration/proposals/defer-hydration.md).  So this example suggests an approach that builds on that proposed protocol.
+
+ [defer-hydration proposal](https://github.com/webcomponents-cg/community-protocols/blob/defer-hydration/proposals/defer-hydration.md).  So this example suggests an approach that builds on that proposed protocol.
 
 
 
