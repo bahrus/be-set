@@ -23,7 +23,8 @@ With the syntax below:
 ... *be-set* does the following:
 
 1.  Parses the be-set attribute using JSON.Parse.
-2.  Does an Object.assign of the instance the attribute is on (my-custom-element in this case), shallow-merging the parsed object obtained in step 1.
+2.  Does a deep merge of the parsed object obtained in step 1, into  the instance the attribute is on (my-custom-element in this case).
+3.  Provides a cascade level of property settings, similar to CSS.
 
 One potential objection to the syntax shown above is that JSON is quite finicky about allowed syntax, giving the developer a potentially frustrating experience.
 
