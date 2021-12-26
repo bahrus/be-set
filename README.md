@@ -1,6 +1,6 @@
 # be-set [TODO]
 
-be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's properties / attributes via deep merge.
+be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's properties / attributes.
 
 ## Basic Use  
 
@@ -9,15 +9,28 @@ With the syntax below:
 ```html
 <my-custom-element be-set='
 {
-    "myStringProp": "supercalifragilisticexpialidocious",
-    "myNumProp": 6.022140857E1023,
-    "myBool": false,
-    "myObjectProp": {
-        "mySubObj":{}
+    "deepMerge": true,
+    "props":{    
+        "myStringProp": "supercalifragilisticexpialidocious",
+        "myNumProp": 6.022140857E23,
+        "myBool": false,
+        "myObjectProp": {
+            "mySubObj":{}
+        },
+        
+    },
+    "scriptRef": "my-script",
+    "complexProps":{
+        "myFunctionCallback": "callback"
     }
-}
-'>
+
+}'>
 </my-custom-element>
+<script nomodule id=my-script be-exportable>
+    export function callback(e){
+        console.log(e);
+    }
+</script>
 ```
 
 ... *be-set* does the following:
