@@ -62,31 +62,33 @@ An option to support JSON Module import will also be supported [TODO]
 The configuration looks like so:
 
 ```html
-
-<script id=config-json type=application/json>
+<script id=config-json type="application/json">
 {
-    script{
-        beCalculating: {
+    "script": {
+        "beCalculating": {
             "args":{
-            "a": {
-                "observeName": "a",
-                "on": "input",
-                "vft": "value"
+                "a": {
+                    "observeName": "a",
+                    "on": "input",
+                    "vft": "value"
+                },
+                "b": {
+                    "observeName": "b",
+                    "on": "input",
+                    "vft": "value"
+                }
             },
-            "b": {
-                "observeName": "b",
-                "on": "input",
-                "vft": "value"
-            }
-        },
-        "transformScope": ["upSearch", "*"],
-        "transform":{"*": "value"}
-    }
+            "transformScope": ["upSearch", "*"],
+            "transform":{"*": "value"}
+        }
         
+    }
 }
 </script>
 
 ```
+
+The be-set attribute can also contain JSON, which can override settings from this shared location on each instance, using deep merge.
 
 
 
