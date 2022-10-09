@@ -1,61 +1,59 @@
 # be-set [TODO]
 
-be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's properties / attributes.
+be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing said element's  properties / attributes in a performant way.
 
-## Basic Use  
+The template element empowers developers to clone and repeat blocks of HTML in a performant way.  be-set aims to provide similar performance boosting benefits, but at a smaller scale, focused (but not necessarily limited to) [be-decorated](https://github.com/bahrus/be-decorated) decorating / element behaviors.
 
-With the syntax below:
+Some of the attributes that can be associated with an element can become quite large.  Consider [this example](https://github.com/bahrus/be-calculating#example-1):
 
 ```html
-<my-custom-element be-set='
-{
-    "deepMerge": true,
-    "props":{    
-        "myStringProp": "supercalifragilisticexpialidocious",
-        "myNumProp": 6.022140857E23,
-        "myBool": false,
-        "myObjectProp": {
-            "mySubObj":{}
+<form>
+    <input type="range" name="a" value="50">
+    +<input type="number" name="b" value="25">
+    =<output name="x"></output>
+    <script type=module nomodule be-calculating='{
+        "args":{
+            "a": {
+                "observeName": "a",
+                "on": "input",
+                "vft": "value"
+            },
+            "b": {
+                "observeName": "b",
+                "on": "input",
+                "vft": "value"
+            }
         },
-        
-    },
-    "scriptRef": "my-script",
-    "complexProps":{
-        "myFunctionCallback": "callback"
-    }
-
-}'>
-</my-custom-element>
-<script nomodule id=my-script be-exportable>
-    export function callback(e){
-        console.log(e);
-    }
-</script>
+        "transformScope": ["upSearch", "*"],
+        "transform":{"*": "value"}
+    }'>        
+        export const calculator = async ({a, b}) => ({
+            value: Number(a) + Number(b)
+        });
+    </script>
+</form>
 ```
 
-... *be-set* does the following:
+Note, that the example above is somewhat contrived - it is showing all the features for something, which is unlikely to be done in practice.  Still, the problem exists.
 
-1.  Parses the be-set attribute using JSON.Parse.
-2.  Does a deep merge of the parsed object obtained in step 1, into  the instance the attribute is on (my-custom-element in this case).
-3.  Provides a cascade level of property settings, similar to CSS.
+What if this form repeats 100's of times down the page, and all the settings are identical?  Or maybe only one small value varies? 
 
-One potential objection to the syntax shown above is that JSON is quite finicky about allowed syntax, giving the developer a potentially frustrating experience.
+be-set helps with that.  It allows us to reference a JSON module / or JSON fetch url, which gets parsed once.  The developer still needs to decorate the element, but like so:
 
-However, [a VSCode plugin](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.json-in-html) is available that provides syntax coloring and catches most JSON errors.  Because the extension is purely JSON-based, it is compatible with the web versions of VS Code.
+```html
+<form>
+    <input type="range" name="a" value="50">
+    +<input type="number" name="b" value="25">
+    =<output name="x"></output>
+    <script type=module nomodule be-calculating=get-set>
+        export const calculator = async ({a, b}) => ({
+                value: Number(a) + Number(b)
+            });
+    </script>
+</form>
+```
 
-## Why?
+Isn't that easier on the eye?  It should be easier for the browser as well.  So what be-set does is it creates a "promise" of values that will be pulled, based on css characteristics of the element, when the be-decorated decorator / behavior gets activated.
 
-*be-set* allows us to set the initial property values in a consistent, well-performing way across all web components, regardless of the libraries they use.
-
-Following this approach allows multiple initial settings to be done in one "pass", without requiring as many "flops" of processing -- reading individual attributes, parsing them based on the type of property in question, etc.
-
-## Adding Non-JSON serializable settings
-
-The [nomodule](https://github.com/bahrus/nomodule) provides a way of exposing JS entities to the DOM world.
-
-
-
- [defer-hydration proposal](https://github.com/webcomponents-cg/community-protocols/blob/defer-hydration/proposals/defer-hydration.md).  So this example suggests an approach that builds on that proposed protocol.
-
-
+ 
 

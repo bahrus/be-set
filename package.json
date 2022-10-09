@@ -8,7 +8,7 @@
     "serve": "node node_modules/xtal-test/serve.js"
   },
   "dependencies": {
-    "trans-render": "0.0.417",
+    "trans-render": "0.0.621",
     "xtal-decor": "0.0.50"  
   },
   "repository": {
