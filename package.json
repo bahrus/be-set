@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node node_modules/xtal-test/serve.js"
+    "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "trans-render": "0.0.626",
-    "xtal-decor": "0.0.50"  
+    "be-decorated": "0.0.191"
+  },
+  "devDependencies": {
+    "may-it-serve": "0.0.4"
   },
   "repository": {
     "type": "git",
