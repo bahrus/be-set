@@ -23,7 +23,7 @@ export async function clone(templ) {
         const key = lispToCamel(parseObj.key.replace('be-', ''));
         if (target.beDecorated === undefined)
             target.beDecorated = {};
-        target.beDecorated.key = parseObj.parsed;
+        target.beDecorated[key] = parseObj.parsed;
     }
     return clone;
 }
