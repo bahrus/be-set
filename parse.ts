@@ -1,26 +1,33 @@
-//const parsedMap = new WeakMap<HTMLTemplateElement, Map<string, any>>();
+const parsedMap = new WeakMap<HTMLTemplateElement, Map<string, any>>();
 export async function parse(templ: HTMLTemplateElement){
     const map = new Map<string, ParseObj>();
+    
     const countContainer = {
         count: 0
     } as CountContainer;
     parseElements(templ.content.children, map, countContainer);
     if(countContainer.count > 0){
-        const {lispToCamel} = await import('trans-render/lib/lispToCamel.js') 
-        const existingClone = templ.content.cloneNode;
-        existingClone.bind(templ.content);
-        templ.content.cloneNode = (deep?: boolean | undefined) => {
-            const clone =  existingClone(deep) as DocumentFragment;
-            for(const className of map.keys()){
-                const target = clone.querySelector('.' + className) as any;
-                const parseObj = map.get(className);
-                const key = lispToCamel(parseObj!.key.replace('be-', ''));
-                if(target.beDecorated === undefined) target.beDecorated = {};
-                target.beDecorated.key = parseObj!.parsed;
-            }
-            return clone;
-        }
+        parsedMap.set(templ, map);
+        
     }
+}
+
+export async function clone(templ: HTMLTemplateElement){
+    const clone = templ.content.cloneNode(true) as DocumentFragment;
+    if(!parsedMap.has(templ)){
+        return clone;
+    }
+    const map = parsedMap.get(templ)!;
+    const {lispToCamel} = await import('trans-render/lib/lispToCamel.js') 
+    //existingClone.bind(templ.content);
+    for(const className of map.keys()){
+        const target = clone.querySelector('.' + className) as any;
+        const parseObj = map.get(className);
+        const key = lispToCamel(parseObj!.key.replace('be-', ''));
+        if(target.beDecorated === undefined) target.beDecorated = {};
+        target.beDecorated.key = parseObj!.parsed;
+    }
+    return clone;
 }
 
 function parseElements(children: HTMLCollection, map: Map<string, ParseObj>, countContainer: CountContainer){

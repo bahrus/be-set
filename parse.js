@@ -1,4 +1,4 @@
-//const parsedMap = new WeakMap<HTMLTemplateElement, Map<string, any>>();
+const parsedMap = new WeakMap();
 export async function parse(templ) {
     const map = new Map();
     const countContainer = {
@@ -6,22 +6,26 @@ export async function parse(templ) {
     };
     parseElements(templ.content.children, map, countContainer);
     if (countContainer.count > 0) {
-        const { lispToCamel } = await import('trans-render/lib/lispToCamel.js');
-        const existingClone = templ.content.cloneNode;
-        existingClone.bind(templ.content);
-        templ.content.cloneNode = (deep) => {
-            const clone = existingClone(deep);
-            for (const className of map.keys()) {
-                const target = clone.querySelector('.' + className);
-                const parseObj = map.get(className);
-                const key = lispToCamel(parseObj.key.replace('be-', ''));
-                if (target.beDecorated === undefined)
-                    target.beDecorated = {};
-                target.beDecorated.key = parseObj.parsed;
-            }
-            return clone;
-        };
+        parsedMap.set(templ, map);
     }
+}
+export async function clone(templ) {
+    const clone = templ.content.cloneNode(true);
+    if (!parsedMap.has(templ)) {
+        return clone;
+    }
+    const map = parsedMap.get(templ);
+    const { lispToCamel } = await import('trans-render/lib/lispToCamel.js');
+    //existingClone.bind(templ.content);
+    for (const className of map.keys()) {
+        const target = clone.querySelector('.' + className);
+        const parseObj = map.get(className);
+        const key = lispToCamel(parseObj.key.replace('be-', ''));
+        if (target.beDecorated === undefined)
+            target.beDecorated = {};
+        target.beDecorated.key = parseObj.parsed;
+    }
+    return clone;
 }
 function parseElements(children, map, countContainer) {
     const arr = Array.from(children);

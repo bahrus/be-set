@@ -8,12 +8,20 @@
 </head>
 <body>
     <template id=test>
-        <div></div>
+        <div be-tested='{"a": "b"}'></div>
     </template>
-    <script>
-        test.content.querySelector('div').test = 'test';
-        const clone = test.content.cloneNode(true);
-        console.log(clone.querySelector('div').test);
+    <script type=importmap>
+        {
+            "imports": {
+                "trans-render/": "../node_modules/trans-render/"
+            }
+        }
+    </script>
+    <script type=module>
+        import {parse, clone} from '../parse.js';
+        await parse(test);
+        const cloned = await clone(test);
+        console.log(cloned.querySelector('div').beDecorated);
     </script>
 </body>
 </html>
