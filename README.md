@@ -1,10 +1,16 @@
-# be-set [TODO]
+# be-set [WIP]
 
-be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.   
+~~be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.~~
+
+be-set is a package that currently provides an export function that can enable initializing numerous element's properties in a performant way.
+
+## Background
 
 The template element empowers developers to clone and repeat blocks of HTML in a performant way.  
 
 Constructible stylesheets provides similar performance benefits when applying the same styling to each ShadowDOM realm deriving from the same template / custom element.
+
+## Mission
 
 be-set aims to provide similar performance boosting benefits, but at a smaller scale, focused (but not necessarily limited to) [be-decorated](https://github.com/bahrus/be-decorated) decorating / element behaviors.
 
