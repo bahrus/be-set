@@ -1,12 +1,11 @@
 {
   "name": "be-set",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Optimize be-decorated based parsing.",
-  "main": "index.js",
-  "keywords":[
+  "main": "parse.js",
+  "keywords": [
     "template-cloning"
   ],
-  "main": "parse.js",
   "module": "parse.js",
   "exports": {
     ".": "./parse.js",
