@@ -48,40 +48,8 @@ Note: the example above is somewhat contrived - it is showing all the features f
 
 What if this form repeats 100's of times down the page, and all the settings are identical?  Or maybe only one small value varies? 
 
-be-set helps with that.  It allows us to reference a JSON configuration on the page, or a JSON module / or JSON fetch url, which gets parsed once.  The developer still needs to decorate the element, but like so:
+be-set helps with that.  It provides two api functions currently:  parse, and clone.
 
-```html
-<template be-set>
-    <form>
-        <input type="range" name="a" value="50">
-        +<input type="number" name="b" value="25">
-        =<output name="x"></output>
-        <script type=module nomodule be-calculating='{
-            "args":{
-                "a": {
-                    "observeName": "a",
-                    "on": "input",
-                    "vft": "value"
-                },
-                "b": {
-                    "observeName": "b",
-                    "on": "input",
-                    "vft": "value"
-                }
-            },
-            "transformScope": ["upSearch", "*"],
-            "transform":{"*": "value"}
-        }'>        
-            export const calculator = async ({a, b}) => ({
-                value: Number(a) + Number(b)
-            });
-        </script>
-    </form>
-</template>
-```
+"parse" examines a template, and manipulates the content of the template, parsing and caching the (repeating) attribute values, storing them in a weak map.
 
-What be-set does is:
-
-1.  Puts all the JSON attributes into a cached lookup.
-2.  Parses all the JSON attributes first before placing in the cache
-3.  Provides a template instantiation plugin that can pass the values directly to the properties before adding to the live dom tree.
+"clone" is a drop-in replacement for native template cloning, that sets beDecorated properties to the cached, parsed objects obtained during the parse.
