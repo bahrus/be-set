@@ -26,6 +26,7 @@ export async function clone(templ: HTMLTemplateElement){
         const key = lispToCamel(parseObj!.key.replace('be-', ''));
         if(target.beDecorated === undefined) target.beDecorated = {};
         target.beDecorated[key] = parseObj!.parsed;
+        target.classList.remove(className);
     }
     return clone;
 }

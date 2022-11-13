@@ -24,6 +24,7 @@ export async function clone(templ) {
         if (target.beDecorated === undefined)
             target.beDecorated = {};
         target.beDecorated[key] = parseObj.parsed;
+        target.classList.remove(className);
     }
     return clone;
 }
