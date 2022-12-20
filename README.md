@@ -84,7 +84,7 @@ What this does:
 
 ```JavaScript
 const make = {
-    myIdId: {
+    "#my-id": {
         be: "calculating",
         having: {
             args:{
