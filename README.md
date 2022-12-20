@@ -4,6 +4,8 @@
 
 be-set is a package that currently provides an export function that can enable initializing numerous element's properties in a performant way.
 
+It is also planning, somehow, to provide a kind of bridge between inline decorators / behaviors, that can progressively enhance server-rendered HTML, vs "casting spells from a distance", that is more optimized for repeating custom elements. [TODO] 
+
 ## Background
 
 The template element empowers developers to clone and repeat blocks of HTML in a performant way.  

@@ -20,7 +20,7 @@
     "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "trans-render": "0.0.641"
+    "trans-render": "0.0.653"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4"
