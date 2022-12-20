@@ -55,3 +55,54 @@ be-set helps with that.  It provides two api functions currently:  parse, and cl
 "parse" examines a template, and manipulates the content of the template, parsing and caching the (repeating) attribute values, storing them in a weak map.
 
 "clone" is a drop-in replacement for native template cloning, that sets beDecorated properties to the cached, parsed objects obtained during the parse.
+
+```html
+<script be-set=my-id type=module nomodule be-calculating='{
+        "args":{
+            "a": {
+                "observeName": "a",
+                "on": "input",
+                "vft": "value"
+            },
+            "b": {
+                "observeName": "b",
+                "on": "input",
+                "vft": "value"
+            }
+        },
+        "transformScope": ["upSearch", "*"],
+        "transform":{"*": "value"}
+    }'>
+    ...
+</script>
+```
+
+What this does:
+
+1.  Sets the id of the script element to my-id
+2.  Adds "make" rule to a running list used by a template that is being constructed:
+
+```JavaScript
+const make = {
+    myIdId: {
+        be: "calculating",
+        having: {
+            args:{
+                a: {
+                    "observeName": "a",
+                    "on": "input",
+                    "vft": "value"
+                },
+                b: {
+                    "observeName": "b",
+                    "on": "input",
+                    "vft": "value"
+                }
+            },
+            transformScope: ["upSearch", "*"],
+            transform:{"*": "value"}
+        }
+    }
+}
+
+```
