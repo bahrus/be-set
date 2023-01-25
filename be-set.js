@@ -1,4 +1,5 @@
 import { define } from 'be-decorated/DE.js';
+import { register } from 'be-hive/register.js';
 export class BeSet extends EventTarget {
     async setProps(pp, mold) {
         const { props, self } = pp;
@@ -37,5 +38,9 @@ define({
                 }
             }
         }
+    },
+    complexPropDefaults: {
+        controller: BeSet
     }
 });
+register(ifWantsToBe, upgrade, tagName);

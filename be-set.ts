@@ -41,5 +41,9 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
                 }
             }
         }
+    },
+    complexPropDefaults:{
+        controller: BeSet
     }
-})
+});
+register(ifWantsToBe, upgrade, tagName);
