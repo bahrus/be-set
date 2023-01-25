@@ -20,9 +20,13 @@
     "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "trans-render": "0.0.653"
+    "be-decorated": "0.0.222",
+    "be-hive": "0.0.79",
+    "trans-render": "0.0.664"
   },
   "devDependencies": {
+    "@skypack/package-check": "0.2.2",
+    "@playwright/test": "1.29.2",
     "may-it-serve": "0.0.4"
   },
   "repository": {

@@ -1,108 +1,22 @@
 # be-set [WIP]
 
-~~be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.~~
+be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.  
 
-be-set is a package that currently provides an export function that can enable initializing numerous element's properties in a performant way.
+Rather than pass through numerous attributeChangedCallbacks, we can pass values to properties directly, from server rendered content.
 
-It is also planning, somehow, to provide a kind of bridge between inline decorators / behaviors, that can progressively enhance server-rendered HTML, vs "casting spells from a distance", that is more optimized for repeating custom elements. [TODO] 
+be-set also provides the ability to set nested property values.
 
-## Background
+It also provides a way to specify property values "from a distance".
 
-The template element empowers developers to clone and repeat blocks of HTML in a performant way.  
-
-Constructible stylesheets provides similar performance benefits when applying the same styling to each ShadowDOM realm deriving from the same template / custom element.
-
-## Mission
-
-be-set aims to provide similar performance boosting benefits, but at a smaller scale, focused (but not necessarily limited to) [be-decorated](https://github.com/bahrus/be-decorated) decorating / element behaviors.
-
-Some of the attributes that can be associated with an element behavior can become quite large.  Consider [this example](https://github.com/bahrus/be-calculating#example-1):
+## Lingo
 
 ```html
-<form>
-    <input type="range" name="a" value="50">
-    +<input type="number" name="b" value="25">
-    =<output name="x"></output>
-    <script type=module nomodule be-calculating='{
-        "args":{
-            "a": {
-                "observeName": "a",
-                "on": "input",
-                "vft": "value"
-            },
-            "b": {
-                "observeName": "b",
-                "on": "input",
-                "vft": "value"
-            }
-        },
-        "transformScope": ["upSearch", "*"],
-        "transform":{"*": "value"}
-    }'>        
-        export const calculator = async ({a, b}) => ({
-            value: Number(a) + Number(b)
-        });
-    </script>
-</form>
-```
+<my-element be-set='{
+    "prop1": 23,
+    ".prop2.subProp3.subProp4": 57,
+    ".beDecorated.observant": {
 
-Note: the example above is somewhat contrived - it is showing all the features for something, which is unlikely to be done in practice.  Still, the problem exists.
-
-What if this form repeats 100's of times down the page, and all the settings are identical?  Or maybe only one small value varies? 
-
-be-set helps with that.  It provides two api functions currently:  parse, and clone.
-
-"parse" examines a template, and manipulates the content of the template, parsing and caching the (repeating) attribute values, storing them in a weak map.
-
-"clone" is a drop-in replacement for native template cloning, that sets beDecorated properties to the cached, parsed objects obtained during the parse.
-
-```html
-<script be-set=my-id type=module nomodule be-calculating='{
-        "args":{
-            "a": {
-                "observeName": "a",
-                "on": "input",
-                "vft": "value"
-            },
-            "b": {
-                "observeName": "b",
-                "on": "input",
-                "vft": "value"
-            }
-        },
-        "transformScope": ["upSearch", "*"],
-        "transform":{"*": "value"}
-    }'>
-    ...
-</script>
-```
-
-What this does:
-
-1.  Sets the id of the script element to my-id
-2.  Adds "make" rule to a running list used by a template that is being constructed:
-
-```JavaScript
-const make = {
-    "#my-id": {
-        be: "calculating",
-        having: {
-            args:{
-                a: {
-                    "observeName": "a",
-                    "on": "input",
-                    "vft": "value"
-                },
-                b: {
-                    "observeName": "b",
-                    "on": "input",
-                    "vft": "value"
-                }
-            },
-            transformScope: ["upSearch", "*"],
-            transform:{"*": "value"}
-        }
     }
-}
-
+}'>
 ```
+
