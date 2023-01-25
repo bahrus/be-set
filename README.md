@@ -6,7 +6,7 @@
 
 be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.  
 
-Rather than pass through numerous attributeChangedCallbacks, we can pass values to properties directly, from server rendered content.
+Rather than pass through numerous attributeChangedCallbacks with type conversions, we can pass values to properties directly, from server rendered content.
 
 be-set also provides the ability to set nested property values.
 
