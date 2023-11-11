@@ -4,7 +4,7 @@
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-set?style=for-the-badge)](https://bundlephobia.com/result?p=be-set)
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-set?compression=gzip">
 
-be-set is a Custom Element / native DOM [behavior/decorator](https://github.com/bahrus/xtal-decor) that focuses on initializing numerous element's  properties  in a performant way.  
+be-set is a Custom Element / native DOM [behavior/enhancement](https://github.com/bahrus/be-enhanced) that focuses on initializing numerous element's  properties in a performant way.  
 
 Rather than pass through numerous attributeChangedCallbacks with type conversions, we can pass values to properties directly, from server rendered content.
 
