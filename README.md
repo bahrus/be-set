@@ -11,7 +11,7 @@ Rather than pass through numerous attributeChangedCallbacks with type conversion
 be-set also provides the ability to set nested property values and attach be-enhanced enhancements.
 
 
-The JSON contained inside the script element utilizes [DTR syntax](https://github.com/bahrus/trans-render).
+The JSON contained inside the script element utilizes [DTR syntax](https://github.com/bahrus/trans-render#declarative-trans-render-syntax-via-json-serializable-rhs-expressions-with-libdtrjs).
 
 ## Example 1
 
