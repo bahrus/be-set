@@ -1,4 +1,4 @@
-# be-set [Untested]
+# be-set [TODO]
 
 [![NPM version](https://badge.fury.io/js/be-set.png)](http://badge.fury.io/js/be-set)
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-set?style=for-the-badge)](https://bundlephobia.com/result?p=be-set)
@@ -8,21 +8,33 @@ be-set is a Custom Element / native DOM [behavior/enhancement](https://github.co
 
 Rather than pass through numerous attributeChangedCallbacks with type conversions, we can pass values to properties directly, from server rendered content.
 
-be-set also provides the ability to set nested property values.
+be-set also provides the ability to set nested property values and attach be-enhanced enhancements.
 
-It also provides a way to set property values "from a distance" via something like [be-having](https://github.com/bahrus/be-having).
+
+The JSON contained inside the script element utilizes [DTR syntax](https://github.com/bahrus/trans-render).
 
 ## Lingo
 
 ```html
-<my-element be-set='{
-    "prop1": 23,
-    ".prop2.subProp3.subProp4": 57,
-    ".beDecorated.observant": {
-
-    }
-}'>
+<html>
+    <head>
+        <script id=my-settings be-set type=application/json>
+            {
+                "input": {
+                    "readOnly": true
+                }
+            }
+        </script>
+    </head>
+<body>
+        ...
+        <div be-set="Settings from #my-settings.">
+            <input>
+        </div>
+</body>
 ```
+
+What this does:  Does an "up shadow search" for the first script element it finds with id=my-settings, type=application.json.
 
 ## Viewing Locally
 
