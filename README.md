@@ -13,7 +13,7 @@ be-set also provides the ability to set nested property values and attach be-enh
 
 The JSON contained inside the script element utilizes [DTR syntax](https://github.com/bahrus/trans-render).
 
-## Lingo
+## Example 1
 
 ```html
 <html>
@@ -34,7 +34,7 @@ The JSON contained inside the script element utilizes [DTR syntax](https://githu
 </body>
 ```
 
-What this does:  Does an "up shadow search" for the first script element it finds with id=my-settings, type=application.json.
+What this does:  Does an "up shadow search" for the first script element it finds with id=my-settings, type=application/json.
 
 We can also set the host to use to apply the trans-render transform from:
 
