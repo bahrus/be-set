@@ -41,7 +41,7 @@ We can also set the host to use to apply the trans-render transform from:
 ```html
 <html>
     <head>
-        <script id=my-settings be-set type=application/json>
+        <script id=my-settings be-parsed type=application/json>
             {
                 "input": {
                     "readOnly": "isHappy"
@@ -53,7 +53,7 @@ We can also set the host to use to apply the trans-render transform from:
     ...
         <mood-stone is-happy>
             #shadow
-            <div be-set="Apply settings from #my-settings, with model coming from host.">
+            <div be-set="Apply settings from #my-settings with model coming from host.">
                 <input>
             </div>
         </mood-stone>
