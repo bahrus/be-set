@@ -18,7 +18,7 @@ The JSON contained inside the script element utilizes [DTR syntax](https://githu
 ```html
 <html>
     <head>
-        <script id=my-settings be-set type=application/json>
+        <script id=my-settings be-parsed type=application/json>
             {
                 "input": {
                     "readOnly": true
