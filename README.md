@@ -38,7 +38,7 @@ The JSON contained inside the script element utilizes [DTR syntax](https://githu
 
 ...
 
-What this does:  Searches for script element by id, looks at the type.  If the type contains "json", applies be-parsed enhancement to parse the json inside.  Then it applies the DTR transform, targeting the parent element of the template element.
+What this does:  Searches for script element by id, looks at the type.  If the type contains "json", applies be-parsed enhancement to parse the json inside.  Then it applies the DTR transform, targeting the parent element of the template element (the body element).
 
 ## Example 2
 
@@ -57,10 +57,10 @@ What this does:  Searches for script element by id, looks at the type.  If the t
     ...
         <mood-stone is-happy>
             #shadow
-            <div be-set="from #my-settings with model coming from host.">
+            <div>
                 <input>
             </div>
-            <be-hive></be-hive>
+            <be-hive be-set="from #my-settings with model coming from host."></be-hive>
         </mood-stone>
 </body>
 </html>
@@ -70,6 +70,7 @@ What this does:
 
 1.  Searches first for script element outside any Shadow DOM (i.e. document.querySelector) for element with id my-settings.
 2.  If no such element is found, searches for element within the Shadow DOM realm with that id.  This allows the web component to provide its own defaults, which can be overridden (dependency injected) by global settings.
+3.  Applies transform on shadow root.
 
 ## Example 3
 
