@@ -66,6 +66,11 @@ What this does:  Searches for script element by id, looks at the type.  If the t
 </html>
 ```
 
+What this does:
+
+1.  Searches first for script element outside any Shadow DOM (i.e. document.querySelector) for element with id my-settings.
+2.  If no such element is found, searches for element within the Shadow DOM realm with that id.  This allows the web component to provide its own defaults, which can be overridden (dependency injected) by global settings.
+
 ## Example 3
 
 
