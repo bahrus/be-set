@@ -70,7 +70,7 @@ What this does:
 
 1.  Searches first for script element outside any Shadow DOM (i.e. document.querySelector) for element with id my-settings.
 2.  If no such element is found, searches for element within the Shadow DOM realm with that id.  This allows the web component to provide its own defaults, which can be overridden (dependency injected) by global settings.
-3.  Applies transform on shadow root.
+3.  Applies transform on "parent" of element be-set adorns, which in this case is the shadow root.
 
 ## Example 3
 
