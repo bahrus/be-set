@@ -18,7 +18,7 @@ The JSON contained inside the script element utilizes [DTR syntax](https://githu
 ```html
 <html>
     <head>
-        <script id=my-settings be-parsed type=application/json>
+        <script id=my-settings type=application/json>
             {
                 "input": {
                     "readOnly": true
@@ -27,16 +27,20 @@ The JSON contained inside the script element utilizes [DTR syntax](https://githu
         </script>
     </head>
 <body>
-        ...
-        <div be-set="Apply settings from #my-settings.">
-            <input>
-        </div>
+    ...
+    <div>
+        <input>
+    </div>
+    ...
+    <template be-set="from #my-settings"></template>
 </body>
 ```
 
-What this does:  Does an "up shadow search" for the first script element it finds with id=my-settings, type=application/json.
+...
 
-We can also set the host to use to apply the trans-render transform from:
+What this does:  Searches for script element by id, looks at the type.  If the type contains "json", applies be-parsed enhancement to parse the json inside.  Then it applies the DTR transform, targeting the parent element of the template element.
+
+## Example 2
 
 ```html
 <html>
@@ -53,13 +57,18 @@ We can also set the host to use to apply the trans-render transform from:
     ...
         <mood-stone is-happy>
             #shadow
-            <div be-set="Apply settings from #my-settings with model coming from host.">
+            <div be-set="from #my-settings with model coming from host.">
                 <input>
             </div>
+            <be-hive></be-hive>
         </mood-stone>
 </body>
 </html>
 ```
+
+## Example 3
+
+
 
 ## Viewing Locally
 
